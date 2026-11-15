@@ -129,6 +129,7 @@ exclude:
   - Gemfile.lock
   - Rakefile
   - README.md
+  - AGENTS.md
   - screenshot.png
   - vendor
   - deploy-utcs.sh
