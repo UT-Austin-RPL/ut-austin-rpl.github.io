@@ -10,9 +10,7 @@ tags: publications
 <div class="container">
 
   <p>For the up-to-date publication list, please visit the <a href="https://scholar.google.com/citations?hl=en&user=mWGyYMsAAAAJ&view_op=list_works">Google Scholar</a> page.</p>
-  
-  <p><div class="pub-note">* Equal contribution.&nbsp;&nbsp;&dagger; Equal advising.</div></p>
-  
+
   {% assign publications_sorted = site.categories.publications | sort_publications %}
   {% if publications_sorted.size > 0 %}
     {% assign first_publication_year = publications_sorted.first.date | date: '%Y' %}

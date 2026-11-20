@@ -4,3 +4,7 @@ layout: post
 <img src="{{ '/publications/images/' | append: page.images.main | relative_url }}" style="display: block; max-width: 100%; margin: 32px 0" alt="main">
 
 {{ content }}
+
+{% if page.note %}
+<p class="pub-note">{{ page.note }}</p>
+{% endif %}

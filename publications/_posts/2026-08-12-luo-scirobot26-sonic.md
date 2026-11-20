@@ -20,5 +20,3 @@ SONIC uses human motion tracking to train a single controller for whole-body hum
 A real-time kinematic planner generates reference motions for tasks such as navigation. A shared motion representation also lets the same policy follow a VR operator or take commands from a vision-language-action model. On a physical humanoid, this interface enables autonomous manipulation that requires the robot to coordinate where it places its hands and feet.
 
 Published in [*Science Robotics*, vol. 11, issue 117, article eaed4592]({{ page.journal_link }}).
-
-<p class="pub-note">{{ page.note }}</p>
