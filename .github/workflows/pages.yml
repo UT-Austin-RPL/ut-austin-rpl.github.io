@@ -40,6 +40,10 @@ jobs:
         run: |
           bundle exec ruby scripts/test_site_url_scope.rb
           node scripts/test_legacy_redirect.cjs
+      - name: Record the revision in the public site artifact
+        if: github.event_name != 'pull_request'
+        run: ruby scripts/write_site_revision.rb "$GITHUB_SHA"
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4

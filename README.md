@@ -45,6 +45,16 @@ Validation checks internal links and assets across generated pages, the publicat
 
 Separate GitHub Pages project sites on the same organization host are listed in `_data/github_pages_projects.yml`. Only absolute links to those explicit project paths are treated as external. Unknown paths and relative links must still resolve inside this website; main-site files must not collide with those project paths.
 
+## Cloudflare Pages review previews
+
+The Slack bridge uses Cloudflare Pages Direct Upload. The 5090 checks out the draft branch's exact commit in a separate worktree and builds it without GitHub or Cloudflare credentials. The Mac uploads the resulting `_site` directory with Wrangler. Reviewers receive the deployment URL in Slack; the production site continues to use GitHub Pages.
+
+The build entry point is `bash scripts/build_preview.sh`. It uses the Ruby version in `.ruby-version` (currently 3.2.4) and the Bundler version recorded in `Gemfile.lock`. To reproduce it locally, run `RPL_PREVIEW_URL=https://review.example.org bash scripts/build_preview.sh`. With Cloudflare's optional Git integration, Pages supplies `CF_PAGES_URL` and the v3 build image can use `SKIP_DEPENDENCY_INSTALL=1` to let this command install the locked dependencies.
+
+Share the preview link in its Slack thread or draft pull request. The banner identifies the preview, analytics are disabled, and indexing is discouraged. Preview URLs can be opened by anyone with access to the preview host. Merging an approved pull request into `main` uses the production GitHub Pages workflow. Both sites expose the deployed Git SHA in `/rpl-site-revision.json` (field `commit`).
+
+Cloudflare Pages serves files up to 25 MiB. The preview redirects eight unchanged historical PDFs to their existing production URLs and verifies their SHA-256 hashes before doing so. New or modified files above that limit fail the preview build and report their path.
+
 ## Organization-root URL and old bookmarks
 
 GitHub serves the organization homepage from the repository named `<organization>.github.io`. Renaming the repository alone does not update Jekyll's asset URLs: `_config.yml` must use `url: "https://ut-austin-rpl.github.io"` and `baseurl: ""`.
